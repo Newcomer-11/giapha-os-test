@@ -97,6 +97,9 @@ export default function MemberForm({
 
   const [note, setNote] = useState(initialData?.note || "");
 
+  const [burialPlace, setBurialPlace] = useState(
+  initialData?.burial_place ?? "",
+  );
   // Private fields
   const [phoneNumber, setPhoneNumber] = useState(
     initialData?.phone_number ?? "",
@@ -323,6 +326,7 @@ export default function MemberForm({
         is_in_law: isInLaw,
         birth_order: birthOrder === "" ? null : Number(birthOrder),
         generation: generation === "" ? null : Number(generation),
+        burial_place: isDeceased ? (burialPlace || null) : null,
         other_names: otherNames || null,
         avatar_url: url,
         note: note || null,
@@ -843,6 +847,19 @@ export default function MemberForm({
                           className={inputClasses}
                         />
                       </div>
+                    </div>
+                    {/* Burial Place */}
+                    <div>
+                      <label className="block text-sm font-semibold text-stone-700 mb-2">
+                        Địa điểm an táng
+                      </label>
+                      <input
+                        type="text"
+                        value={burialPlace}
+                        onChange={(e) => setBurialPlace(e.target.value)}
+                        placeholder="Ví dụ: Nghĩa trang xã..."
+                        className={inputClasses}
+                      />
                     </div>
                   </div>
                 </motion.div>

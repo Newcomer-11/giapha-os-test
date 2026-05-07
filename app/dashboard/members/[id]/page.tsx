@@ -31,16 +31,23 @@ export default async function MemberDetailPage({ params }: PageProps) {
   }
 
   // Fetch Private Data if Admin
-  let privateData = null;
-  if (isAdmin) {
-    const { data } = await supabase
-      .from("person_details_private")
-      .select("*")
-      .eq("person_id", id)
-      .single();
-    privateData = data;
-  }
+  //let privateData = null;
+  //if (isAdmin) {
+  //  const { data } = await supabase
+  //    .from("person_details_private")
+  //    .select("*")
+  //    .eq("person_id", id)
+  //    .single();
+  //  privateData = data;
+  //}
 
+  // Fetch Private Data for all users
+  const { data: privateData } = await supabase
+    .from("person_details_private")
+    .select("*")
+    .eq("person_id", id)
+    .single();
+  console.log("privateData:", privateData);
   return (
     <div className="flex-1 w-full relative flex flex-col pb-8">
       {/* Decorative background blurs */}

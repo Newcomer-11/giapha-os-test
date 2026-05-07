@@ -56,16 +56,23 @@ export default function MemberDetailModal() {
         setPerson(personData);
 
         // 2. Fetch Private Data if Admin
-        if (isAdmin) {
-          const { data: privData } = await supabase
-            .from("person_details_private")
-            .select("*")
-            .eq("person_id", id)
-            .single();
-          setPrivateData(privData || {});
-        } else {
-          setPrivateData(null);
-        }
+        // if (isAdmin) {
+        //   const { data: privData } = await supabase
+        //     .from("person_details_private")
+        //     .select("*")
+        //     .eq("person_id", id)
+        //     .single();
+        //   setPrivateData(privData || {});
+        // 2. Fetch Private Data for all users
+        const { data: privData } = await supabase
+          .from("person_details_private")
+          .select("*")
+          .eq("person_id", id)
+          .single();
+        setPrivateData(privData || {});
+        // } else {
+        //   setPrivateData(null);
+        // }
       } catch (err) {
         console.error("Error fetching member details:", err);
         // @ts-expect-error - err is caught as unknown, but we check for message

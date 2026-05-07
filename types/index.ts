@@ -35,6 +35,7 @@ export interface Person {
   note: string | null;
   created_at: string;
   updated_at: string;
+  burial_place?: string | null;
 
   // Private fields (optional, as they might not be returned for members)
   phone_number?: string | null;

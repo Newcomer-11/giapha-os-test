@@ -326,6 +326,12 @@ export default function MemberDetailContent({
                             ) || "Chưa rõ"}
                       </p>
                     )}
+                    {person.burial_place && (
+                    <p className="text-sm font-medium text-stone-500 flex items-center gap-1.5">
+                      <MapPin className="w-3 h-3 shrink-0" />
+                      {person.burial_place}
+                    </p>
+                  )}
                   </div>
                 </motion.div>
               )}
@@ -585,7 +591,8 @@ export default function MemberDetailContent({
           {/* Sidebar / Private Info */}
           <div className="space-y-6">
             <motion.div layout variants={itemVariants}>
-              {isAdmin ? (
+              {/* Private Information Section (Admin Only) */}
+
                 <div className="bg-stone-50 p-5 sm:p-6 rounded-2xl border border-stone-200/80 shadow-sm">
                   <h3 className="font-bold text-stone-900 mb-4 flex items-center gap-2 text-sm sm:text-base border-b border-stone-200/60 pb-3">
                     <span className="bg-amber-100/80 text-amber-700 p-1.5 rounded-lg border border-amber-200/50">
@@ -632,14 +639,6 @@ export default function MemberDetailContent({
                     </div>
                   </dl>
                 </div>
-              ) : (
-                <div className="bg-stone-50/50 p-5 rounded-2xl border border-stone-200 border-dashed flex flex-col items-center justify-center text-center gap-2">
-                  <span className="text-2xl opacity-50">🔒</span>
-                  <p className="text-sm font-medium text-stone-500">
-                    Thông tin liên hệ chỉ hiển thị với Quản trị viên.
-                  </p>
-                </div>
-              )}
             </motion.div>
           </div>
         </div>
