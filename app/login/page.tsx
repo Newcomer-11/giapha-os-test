@@ -41,6 +41,26 @@ export default function LoginPage() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [confirmPassword, setConfirmPassword] = useState("");
 
+
+  const mapAuthError = (message: string): string => {
+  if (message.includes("Invalid login credentials"))
+    return "Email hoặc mật khẩu không đúng. Vui lòng thử lại.";
+  if (message.includes("Email not confirmed"))
+    return "Email chưa được xác nhận. Vui lòng kiểm tra hộp thư.";
+  if (message.includes("User already registered"))
+    return "Email này đã được đăng ký. Vui lòng đăng nhập.";
+  if (message.includes("Password should be at least"))
+    return "Mật khẩu phải có ít nhất 6 ký tự.";
+  if (message.includes("Unable to validate email address"))
+    return "Địa chỉ email không hợp lệ.";
+  if (message.includes("Email rate limit exceeded"))
+    return "Quá nhiều yêu cầu. Vui lòng thử lại sau vài phút.";
+  if (message.includes("over_email_send_rate_limit"))
+    return "Quá nhiều yêu cầu gửi email. Vui lòng thử lại sau.";
+  if (message.includes("Network"))
+    return "Lỗi kết nối mạng. Vui lòng kiểm tra internet.";
+  return "Đã xảy ra lỗi. Vui lòng thử lại.";
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -55,7 +75,7 @@ export default function LoginPage() {
         });
 
         if (error) {
-          setError(error.message);
+          setError(mapAuthError(error.message));
         } else {
           router.push("/dashboard");
           router.refresh();
@@ -83,7 +103,7 @@ export default function LoginPage() {
             return;
           }
 
-          setError(error.message);
+          setError(mapAuthError(error.message));
         } else if (data.user?.identities && data.user.identities.length === 0) {
           setError(
             "Email này đã được đăng ký. Vui lòng đăng nhập hoặc dùng email khác.",

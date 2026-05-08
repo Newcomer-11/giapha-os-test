@@ -147,3 +147,115 @@ export async function parseCsvZip(zipBlob: Blob): Promise<{
 
   return result;
 }
+
+
+// ── CSV TEMPLATE IMPORT ──────────────────────────────────────────────────────
+
+export const CSV_IMPORT_COLUMNS: Record<string, string> = {
+  full_name: "Họ và tên (*)",
+  gender: "Giới tính (*) [male/female/other]",
+  birth_year: "Năm sinh",
+  birth_month: "Tháng sinh",
+  birth_day: "Ngày sinh",
+  death_year: "Năm mất",
+  death_month: "Tháng mất",
+  death_day: "Ngày mất",
+  is_deceased: "Đã mất [true/false]",
+  generation: "Đời thứ",
+  birth_order: "Thứ tự sinh",
+  other_names: "Tên khác",
+  note: "Ghi chú",
+  burial_place: "Nơi an táng",
+  phone_number: "Số điện thoại",
+  occupation: "Nghề nghiệp",
+  current_residence: "Nơi ở hiện tại",
+};
+
+export function generateCsvTemplate(): string {
+  const headers = Object.values(CSV_IMPORT_COLUMNS);
+  const example1 = [
+    "Nguyễn Văn An", "male", "1940", "", "", "", "", "",
+    "false", "1", "1", "", "Người sáng lập dòng họ", "", "", "", "Hà Nội",
+  ];
+  const example2 = [
+    "Nguyễn Thị Bình", "female", "1975", "3", "15", "", "", "",
+    "false", "2", "1", "Bình", "", "", "0912345678", "Giáo viên", "TP.HCM",
+  ];
+  const rows = [headers, example1, example2];
+  return UTF8_BOM + rows.map((row) =>
+    row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
+  ).join("\n");
+}
+
+export function parseCsvTemplate(csvText: string): {
+  persons: Record<string, unknown>[];
+  privateData: Record<string, unknown>[];
+  errors: string[];
+} {
+  const columnKeys = Object.keys(CSV_IMPORT_COLUMNS);
+  const columnValues = Object.values(CSV_IMPORT_COLUMNS);
+
+  const parsed = Papa.parse<Record<string, string>>(
+    csvText.startsWith(UTF8_BOM) ? csvText.slice(1) : csvText,
+    { header: true, skipEmptyLines: true }
+  );
+
+  const persons: Record<string, unknown>[] = [];
+  const privateData: Record<string, unknown>[] = [];
+  const errors: string[] = [];
+
+  parsed.data.forEach((row, i) => {
+    // Map tên cột tiếng Việt → key database
+    const mapped: Record<string, string | null> = {};
+    Object.entries(row).forEach(([header, value]) => {
+      const keyIdx = columnValues.indexOf(header);
+      if (keyIdx !== -1) {
+        mapped[columnKeys[keyIdx]] = value?.trim() || null;
+      }
+    });
+
+    // Validate bắt buộc
+    if (!mapped.full_name) {
+      errors.push(`Dòng ${i + 2}: Thiếu họ tên.`);
+      return;
+    }
+    if (!["male", "female", "other"].includes(mapped.gender ?? "")) {
+      errors.push(`Dòng ${i + 2}: Giới tính không hợp lệ (phải là male/female/other).`);
+      return;
+    }
+
+    const toInt = (v: string | null) => {
+      const n = parseInt(v ?? "", 10);
+      return isNaN(n) ? null : n;
+    };
+
+    persons.push({
+      full_name: mapped.full_name,
+      gender: mapped.gender,
+      birth_year: toInt(mapped.birth_year),
+      birth_month: toInt(mapped.birth_month),
+      birth_day: toInt(mapped.birth_day),
+      death_year: toInt(mapped.death_year),
+      death_month: toInt(mapped.death_month),
+      death_day: toInt(mapped.death_day),
+      is_deceased: mapped.is_deceased === "true" || !!toInt(mapped.death_year),
+      generation: toInt(mapped.generation),
+      birth_order: toInt(mapped.birth_order),
+      other_names: mapped.other_names ?? null,
+      note: mapped.note ?? null,
+      burial_place: mapped.burial_place ?? null,
+      is_in_law: false,
+    });
+
+    if (mapped.phone_number || mapped.occupation || mapped.current_residence) {
+      privateData.push({
+        _index: persons.length - 1,
+        phone_number: mapped.phone_number ?? null,
+        occupation: mapped.occupation ?? null,
+        current_residence: mapped.current_residence ?? null,
+      });
+    }
+  });
+
+  return { persons, privateData, errors };
+}

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import config from "./config";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -16,17 +18,31 @@ export const metadata: Metadata = {
   description: config.siteName,
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+// export default function RootLayout({
+//   children,
+// }: Readonly<{
+//   children: React.ReactNode;
+// }>) {
+//   return (
+//     <html lang="vi" suppressHydrationWarning>
+//       <body
+//         className={`${inter.variable} ${playfair.variable} font-sans antialiased relative`}
+//       >
+//         <ThemeProvider>
+//           {children}
+//         </ThemeProvider>
+//       </body>
+//     </html>
+//   );
+// }
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="vi">
-      <body
-        className={`${inter.variable} ${playfair.variable} font-sans antialiased relative`}
-      >
-        {children}
+    <html lang="vi" suppressHydrationWarning>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased relative`}>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

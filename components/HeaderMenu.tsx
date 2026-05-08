@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { BarChart2, ChevronDown, Database, GitMerge, Info, Network, UserCircle, Users } from "lucide-react";
+import { BarChart2, ChevronDown, Database, GitMerge, Info, Network, UserCircle, Users, UserLock, History } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import LogoutButton from "./LogoutButton";
@@ -112,6 +112,24 @@ export default function HeaderMenu() {
                   >
                     <Users className="size-4" />
                     Quản lý Người dùng
+                  </Link>
+
+                  <Link
+                    href="/dashboard/settings"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-stone-700 hover:text-rose-700 hover:bg-rose-50 transition-colors"
+                  >
+                    <UserLock className="size-4" />
+                    Cài đặt Quyền riêng tư
+                  </Link>
+
+                  <Link
+                    href="/dashboard/audit"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-2 px-4 py-2.5 text-sm font-medium text-stone-700 hover:text-rose-700 hover:bg-rose-50 transition-colors"
+                  >
+                    <History className="size-4" />
+                    Log thay đổi
                   </Link>
 
                   <Link

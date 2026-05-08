@@ -476,3 +476,15 @@ BEGIN
     WHERE id = target_user_id;
 END;
 $$;
+
+-- Add them noi an tang
+ALTER TABLE public.persons 
+ADD COLUMN IF NOT EXISTS burial_place TEXT;
+
+
+
+-- Cap quyen view sdt cho user
+DROP POLICY IF EXISTS "Admins can view private details" ON public.person_details_private;
+
+CREATE POLICY "All users can view private details" ON public.person_details_private 
+FOR SELECT TO authenticated USING (true);

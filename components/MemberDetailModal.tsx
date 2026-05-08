@@ -81,7 +81,7 @@ export default function MemberDetailModal() {
         setLoading(false);
       }
     },
-    [isAdmin, supabase],
+    [supabase],
   );
 
   // Sync state with URL parameter or create mode

@@ -1,56 +1,205 @@
 @import "tailwindcss";
 
+/* ── LIGHT THEME ─────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FDFAF5;
+  --foreground: #1C1917;
+
+  --surface: #FFFFFF;
+  --surface-raised: #F7F3EC;
+  --surface-overlay: #F0EBE1;
+
+  --border: #E5DDD0;
+  --border-subtle: #EDE8DF;
+
+  --text-primary: #1C1917;
+  --text-secondary: #57534E;
+  --text-muted: #A8A29E;
+
+  --accent: #B45309;
+  --accent-hover: #92400E;
+  --accent-subtle: #FEF3C7;
+  --accent-border: #FCD34D;
+
+  --danger: #DC2626;
+  --danger-subtle: #FEF2F2;
+
+  --success: #16A34A;
+  --success-subtle: #F0FDF4;
+}
+
+/* ── DARK THEME ────────────────────────────────────────────
+.dark {
+  --background: #141210;
+  --foreground: #E8E3DC;
+
+  --surface: #1E1A17;
+  --surface-raised: #262118;
+  --surface-overlay: #2E2820;
+
+  --border: #3D3530;
+  --border-subtle: #332E29;
+
+  --text-primary: #E8E3DC;
+  --text-secondary: #A89880;
+  --text-muted: #6B5E52;
+
+  --accent: #F59E0B;
+  --accent-hover: #FBBF24;
+  --accent-subtle: #2D2010;
+  --accent-border: #92400E;
+
+  --danger: #F87171;
+  --danger-subtle: #2D1515;
+
+  --success: #4ADE80;
+  --success-subtle: #0F2D1A;
+} */
+
+/* ── DARK MODE OVERRIDES ─────────────────────────────────── */
+.dark body {
+  background-color: #141210;
+  color: #E8E3DC;
+}
+
+.dark .bg-white,
+.dark .bg-white\/80,
+.dark .bg-white\/60,
+.dark .bg-white\/95 {
+  background-color: #1E1A17 !important;
+}
+
+.dark .bg-stone-50,
+.dark .bg-stone-50\/50,
+.dark .bg-stone-100,
+.dark .bg-stone-100\/50 {
+  background-color: #262118 !important;
+}
+
+.dark .bg-stone-200 {
+  background-color: #2E2820 !important;
+}
+
+.dark .text-stone-800,
+.dark .text-stone-900 {
+  color: #E8E3DC !important;
+}
+
+.dark .text-stone-600,
+.dark .text-stone-700 {
+  color: #A89880 !important;
+}
+
+.dark .text-stone-500,
+.dark .text-stone-400 {
+  color: #6B5E52 !important;
+}
+
+.dark .border-stone-200,
+.dark .border-stone-200\/60,
+.dark .border-stone-200\/80 {
+  border-color: #3D3530 !important;
+}
+
+.dark .shadow-sm,
+.dark .shadow-md {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4) !important;
+}
+
+/* Header */
+.dark header {
+  background-color: #1E1A17 !important;
+  border-color: #3D3530 !important;
+}
+
+/* Cards */
+.dark .rounded-2xl,
+.dark .rounded-xl {
+  background-color: #1E1A17;
+}
+
+/* Input fields */
+.dark input,
+.dark textarea,
+.dark select {
+  background-color: #262118 !important;
+  color: #E8E3DC !important;
+  border-color: #3D3530 !important;
+}
+
+/* Sidebar/backdrop */
+.dark .backdrop-blur-sm,
+.dark .backdrop-blur-2xl {
+  background-color: rgba(20, 18, 16, 0.8) !important;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-border: var(--accent-border);
+  --color-danger: var(--danger);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-subtle);
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
 body {
   background: var(--background);
   color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Fix iOS auto-zoom when focusing on inputs */
+/* Fix iOS auto-zoom */
 @media screen and (max-width: 768px) {
-  input,
-  textarea,
-  select {
-    font-size: 16px !important;
-  }
+  input, textarea, select { font-size: 16px !important; }
 }
 
-button,
-a,
-select {
-  cursor: pointer;
+button, a, select { cursor: pointer; }
+
+/* ── SCROLLBAR ───────────────────────────────────────────── */
+.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
 }
 
+/* ── BUTTONS ─────────────────────────────────────────────── */
 .btn {
-  @apply inline-flex items-center px-5 py-2.5 border border-stone-200/80 text-sm font-medium rounded-full shadow-sm hover:shadow-md text-stone-600 bg-linear-to-r bg-white hover:bg-stone-50 transition-all duration-300 hover:-translate-y-0.5 justify-center shrink-0 gap-1.5;
+  @apply inline-flex items-center px-5 py-2.5 border text-sm font-medium rounded-full shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 justify-center shrink-0 gap-1.5;
+  border-color: var(--border);
+  color: var(--text-secondary);
+  background: var(--surface);
 }
+.btn:hover { background: var(--surface-raised); }
 
 .btn-primary {
-  @apply inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-full shadow-sm hover:shadow-md text-white bg-linear-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 transition-all duration-300 hover:-translate-y-0.5 justify-center shrink-0 gap-1.5;
+  @apply inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-full shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 justify-center shrink-0 gap-1.5;
+  background: var(--accent);
+  color: #FFFFFF;
 }
+.btn-primary:hover { background: var(--accent-hover); }
 
 .btn-secondary {
-  @apply inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-full shadow-sm hover:shadow-md text-white bg-linear-to-r from-stone-600 to-stone-700 hover:from-stone-700 hover:to-stone-800 transition-all duration-300 hover:-translate-y-0.5 justify-center shrink-0 gap-1.5;
+  @apply inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-full shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 justify-center shrink-0 gap-1.5;
+  background: var(--text-secondary);
+  color: #FFFFFF;
 }
 
 .title {
-  @apply text-2xl sm:text-3xl font-serif font-bold text-stone-800;
+  @apply text-2xl sm:text-3xl font-serif font-bold;
+  color: var(--text-primary);
 }

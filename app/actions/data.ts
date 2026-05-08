@@ -31,6 +31,7 @@ interface PersonExport {
   other_names: string | null;
   avatar_url: string | null;
   note: string | null;
+  burial_place: string | null;  
   // DB-managed fields (kept in export for traceability, stripped on import)
   created_at?: string;
   updated_at?: string;
@@ -97,6 +98,7 @@ function sanitizePerson(
     other_names: p.other_names ?? null,
     avatar_url: p.avatar_url ?? null,
     note: p.note ?? null,
+    burial_place: p.burial_place ?? null,
   };
 }
 
@@ -387,4 +389,50 @@ export async function importData(
       custom_events: customEventsCount,
     },
   };
+}
+
+
+export async function importFromCsv(
+  persons: Record<string, unknown>[],
+  privateData: Record<string, unknown>[]
+) {
+  const isAdmin = await getIsAdmin();
+  if (!isAdmin) return { error: "Từ chối truy cập." };
+
+  const supabase = await getSupabase();
+  const CHUNK = 200;
+  const insertedIds: string[] = [];
+
+  for (let i = 0; i < persons.length; i += CHUNK) {
+    const chunk = persons.slice(i, i + CHUNK);
+    const { data, error } = await supabase
+      .from("persons")
+      .insert(chunk)
+      .select("id");
+    if (error) return { error: `Lỗi import dòng ${i + 1}: ${error.message}` };
+    insertedIds.push(...(data ?? []).map((r: { id: string }) => r.id));
+  }
+
+  const privateRows = privateData
+    .map((pd) => {
+      const personId = insertedIds[pd._index as number];
+      if (!personId) return null;
+      return {
+        person_id: personId,
+        phone_number: pd.phone_number,
+        occupation: pd.occupation,
+        current_residence: pd.current_residence,
+      };
+    })
+    .filter(Boolean);
+
+  if (privateRows.length > 0) {
+    const { error } = await supabase
+      .from("person_details_private")
+      .insert(privateRows);
+    if (error) return { error: `Lỗi import thông tin liên hệ: ${error.message}` };
+  }
+
+  revalidatePath("/dashboard/members");
+  return { success: true, imported: insertedIds.length };
 }

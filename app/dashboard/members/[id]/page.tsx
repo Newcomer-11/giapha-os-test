@@ -47,7 +47,7 @@ export default async function MemberDetailPage({ params }: PageProps) {
     .select("*")
     .eq("person_id", id)
     .single();
-  console.log("privateData:", privateData);
+
   return (
     <div className="flex-1 w-full relative flex flex-col pb-8">
       {/* Decorative background blurs */}

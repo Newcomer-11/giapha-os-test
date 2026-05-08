@@ -592,7 +592,7 @@ export default function MemberDetailContent({
           <div className="space-y-6">
             <motion.div layout variants={itemVariants}>
               {/* Private Information Section (Admin Only) */}
-
+              {privateData && Object.keys(privateData).length > 0 && (
                 <div className="bg-stone-50 p-5 sm:p-6 rounded-2xl border border-stone-200/80 shadow-sm">
                   <h3 className="font-bold text-stone-900 mb-4 flex items-center gap-2 text-sm sm:text-base border-b border-stone-200/60 pb-3">
                     <span className="bg-amber-100/80 text-amber-700 p-1.5 rounded-lg border border-amber-200/50">
@@ -639,6 +639,7 @@ export default function MemberDetailContent({
                     </div>
                   </dl>
                 </div>
+              )}
             </motion.div>
           </div>
         </div>

@@ -6,8 +6,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { AlertTriangle, CheckCircle2, Download, Upload } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import PersonSelector from "./PersonSelector";
+import CsvImport from "./CsvImport";
 
 export default function DataImportExport() {
+  const [activeTab, setActiveTab] = useState<"backup" | "csv">("backup");
   const [isExporting, setIsExporting] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -212,6 +214,32 @@ export default function DataImportExport() {
 
   return (
     <div className="space-y-6">
+      {/* Tab switcher */}
+      <div className="flex gap-2 border-b border-stone-200 mb-2">
+        <button
+          onClick={() => setActiveTab("backup")}
+          className={`px-4 py-2.5 text-sm font-semibold border-b-2 -mb-px transition-colors ${
+            activeTab === "backup"
+              ? "border-amber-500 text-amber-700"
+              : "border-transparent text-stone-500 hover:text-stone-700"
+          }`}
+        >
+          Sao lưu & Phục hồi
+        </button>
+        <button
+          onClick={() => setActiveTab("csv")}
+          className={`px-4 py-2.5 text-sm font-semibold border-b-2 -mb-px transition-colors ${
+            activeTab === "csv"
+              ? "border-amber-500 text-amber-700"
+              : "border-transparent text-stone-500 hover:text-stone-700"
+          }`}
+        >
+          Nhập liệu CSV
+        </button>
+      </div>
+
+      {activeTab === "csv" ? <CsvImport /> : <>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Export Card */}
         <div className="bg-white/80 border border-stone-200/60 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow relative group">
@@ -313,6 +341,8 @@ export default function DataImportExport() {
               </p>
             </div>
           </div>
+          
+          
 
           <input
             type="file"
@@ -414,6 +444,7 @@ export default function DataImportExport() {
           </motion.div>
         )}
       </AnimatePresence>
+    </>}
     </div>
   );
 }
