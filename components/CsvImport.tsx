@@ -53,7 +53,9 @@ export default function CsvImport() {
     setImporting(false);
 
     if ("error" in result) {
-      setStatus({ type: "error", message: result.error });
+      //setStatus({ type: "error", message: result.error });
+      setStatus({ type: "error", message: result.error ?? "Import failed",
+});
     } else {
       setStatus({
         type: "success",
