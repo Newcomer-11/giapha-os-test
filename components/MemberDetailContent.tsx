@@ -239,13 +239,13 @@ export default function MemberDetailContent({
                           )}
                         </span>
                       )}
-                    {person.birth_day &&
+                    {/* {person.birth_day &&
                       person.birth_month &&
-                      getZodiacSign(person.birth_day, person.birth_month) && (
-                        <span className="text-[10px] font-sans font-bold text-indigo-700 bg-indigo-50 border border-indigo-200/60 rounded-md px-1.5 py-0.5 whitespace-nowrap shadow-xs tracking-wider">
-                          {getZodiacSign(person.birth_day, person.birth_month)}
-                        </span>
-                      )}
+                      // getZodiacSign(person.birth_day, person.birth_month) && (
+                      //   <span className="text-[10px] font-sans font-bold text-indigo-700 bg-indigo-50 border border-indigo-200/60 rounded-md px-1.5 py-0.5 whitespace-nowrap shadow-xs tracking-wider">
+                      //     {getZodiacSign(person.birth_day, person.birth_month)}
+                      //   </span>
+                      )} */}
                   </div>
                 </div>
                 <div className="space-y-1.5 pl-4 border-l-2 border-stone-100">
