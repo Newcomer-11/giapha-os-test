@@ -25,8 +25,11 @@ export default function PersonCard({ person }: PersonCardProps) {
   return (
     <button
       onClick={() => setMemberModalId(person.id)}
-      className={`group block relative bg-white/60 p-2 sm:p-4 rounded-2xl shadow-sm border border-stone-200/60 hover:border-amber-300 hover:shadow-md hover:bg-white/90 transition-all duration-300 overflow-hidden
-        ${isDeceased ? "opacity-80 grayscalePer-[0.3]" : ""}`}
+      //className={`group block relative bg-white/60 p-2 sm:p-4 rounded-2xl shadow-sm border border-stone-200/60 hover:border-amber-300 hover:shadow-md hover:bg-white/90 transition-all duration-300 overflow-hidden
+      className={`group block relative bg-white p-2 sm:p-4 rounded-2xl shadow-sm border border-stone-200/60 hover:shadow-md transition-all duration-300 overflow-hidden
+      ${person.gender === "male" ? "border-l-4 border-l-blue-400" : person.gender === "female" ? "border-l-4 border-l-rose-400" : ""}
+      ${isDeceased ? "opacity-80" : ""}`}
+      //${isDeceased ? "" : ""}`}
     >
       {/* Decorative gradient blob */}
       {/* <div
@@ -37,7 +40,7 @@ export default function PersonCard({ person }: PersonCardProps) {
         <div className="relative">
           <div
             className={`size-14 sm:size-16 rounded-full flex items-center justify-center text-xl font-bold text-white overflow-hidden shrink-0 shadow-lg ring-2 ring-white transition-transform duration-300 group-hover:scale-105
-            ${getAvatarBg(person.gender)}`}
+            ${getAvatarBg(person.gender, person.is_deceased)}`}
           >
             {person.avatar_url ? (
               <Image

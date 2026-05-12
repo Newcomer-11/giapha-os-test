@@ -138,7 +138,7 @@ export const MindmapNode = memo(
                     {ctx.showAvatar && (
                       <div className="relative shrink-0">
                         <div
-                          className={`size-10 rounded-full overflow-hidden flex items-center justify-center text-white text-xs font-bold shadow-md ring-2 ring-white transition-transform duration-300 group-hover/card:scale-105 ${getAvatarBg(data.person.gender)}`}
+                          className={`size-10 rounded-full overflow-hidden flex items-center justify-center text-white text-xs font-bold shadow-md ring-2 ring-white transition-transform duration-300 group-hover/card:scale-105 ${getAvatarBg(data.person.gender, data.person.is_deceased)}`}
                         >
                           {data.person.avatar_url ? (
                             <Image
@@ -228,7 +228,7 @@ export const MindmapNode = memo(
                           >
                             {ctx.showAvatar && (
                               <div
-                                className={`size-8 rounded-full overflow-hidden flex items-center justify-center text-white text-[10px] font-bold shadow-sm ring-2 ring-white transition-transform duration-300 group-hover/spouse:scale-105 ${getAvatarBg(spouseData.person.gender)}`}
+                                className={`size-8 rounded-full overflow-hidden flex items-center justify-center text-white text-[10px] font-bold shadow-sm ring-2 ring-white transition-transform duration-300 group-hover/spouse:scale-105 ${getAvatarBg(spouseData.person.gender, spouseData.person.is_deceased)}`}
                               >
                                 {spouseData.person.avatar_url ? (
                                   <Image

@@ -120,7 +120,7 @@ export default function MemberDetailContent({
             className={`h-24 w-24 sm:h-32 sm:w-32 rounded-full border-4 sm:border-[6px] border-white flex items-center justify-center text-3xl sm:text-4xl font-bold text-white overflow-hidden shadow-xl shrink-0
              ${
                person.gender === "male"
-                 ? "bg-linear-to-br from-sky-400 to-sky-700"
+                 ? "bg-linear-to-br from-sky-400 to-sky-500"
                  : person.gender === "female"
                    ? "bg-linear-to-br from-rose-400 to-rose-700"
                    : "bg-linear-to-br from-stone-400 to-stone-600"

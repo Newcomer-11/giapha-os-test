@@ -394,7 +394,7 @@ export default function DashboardMemberList({
                   <div key={gen} className="space-y-6">
                     <div className="flex items-center gap-3">
                       <div className="h-px flex-1 bg-stone-200"></div>
-                      <h3 className="text-lg font-serif font-bold text-amber-800 bg-amber-50 px-4 py-1.5 rounded-full border border-amber-200/50 shadow-sm">
+                      <h3 className="text-lg font-serif font-bold text-white bg-stone-700 px-4 py-1.5 rounded-full border border-amber-200/50 shadow-sm">
                         {gen === "0" ? "Chưa xác định đời" : `Đời thứ ${gen}`}
                       </h3>
                       <div className="h-px flex-1 bg-stone-200"></div>
@@ -558,9 +558,9 @@ export default function DashboardMemberList({
                                       {isCouple && (
                                         <>
                                           {/* Desktop & Tablet background */}
-                                          <div className="hidden md:block absolute -inset-3 lg:-inset-4 bg-amber-50/70 border border-amber-200/80 rounded-4xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] z-0"></div>
+                                          <div className="hidden md:block absolute -inset-3 lg:-inset-4 bg-stone-50/80 border border-stone-200/60 rounded-4xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] z-0"></div>
                                           {/* Mobile background */}
-                                          <div className="md:hidden absolute -inset-2 bg-amber-50/70 border border-amber-200/80 rounded-3xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] z-0"></div>
+                                          <div className="md:hidden absolute -inset-2 bg-stone-50/80 border border-stone-200/60 rounded-3xl shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)] z-0"></div>
                                         </>
                                       )}
                                       <div
