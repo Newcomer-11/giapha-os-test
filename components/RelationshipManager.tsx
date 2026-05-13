@@ -624,10 +624,39 @@ export default function RelationshipManager({
         return yearA - yearB;
       });
 
+  // if (loading)
+  //   return (
+  //     <div className="text-stone-500 text-sm">
+  //       Đang tải thông tin gia đình...
+  //     </div>
+  //   );
+  
+  // Thay đoạn dòng 627-632
   if (loading)
     return (
-      <div className="text-stone-500 text-sm">
-        Đang tải thông tin gia đình...
+      <div className="space-y-3 animate-pulse">
+        <div className="h-3 bg-stone-100 rounded-full w-1/4 mb-4" />
+        <div className="flex items-center gap-3">
+          <div className="size-10 bg-stone-100 rounded-full shrink-0" />
+          <div className="flex-1 space-y-2">
+            <div className="h-3 bg-stone-100 rounded-full w-1/2" />
+            <div className="h-2 bg-stone-100 rounded-full w-1/3" />
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="size-10 bg-stone-100 rounded-full shrink-0" />
+          <div className="flex-1 space-y-2">
+            <div className="h-3 bg-stone-100 rounded-full w-2/3" />
+            <div className="h-2 bg-stone-100 rounded-full w-1/4" />
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="size-10 bg-stone-100 rounded-full shrink-0" />
+          <div className="flex-1 space-y-2">
+            <div className="h-3 bg-stone-100 rounded-full w-1/2" />
+            <div className="h-2 bg-stone-100 rounded-full w-2/5" />
+          </div>
+        </div>
       </div>
     );
 

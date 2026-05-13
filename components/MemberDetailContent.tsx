@@ -24,7 +24,7 @@ import {
   Users,
 } from "lucide-react";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { Suspense, useCallback, useState } from "react";
 import { FemaleIcon, MaleIcon } from "./GenderIcons";
 
 interface MemberDetailContentProps {
@@ -577,14 +577,31 @@ export default function MemberDetailContent({
                 <Users className="size-5 text-amber-600" />
                 Gia đình
               </h2>
-              <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-stone-200/60 shadow-sm relative z-0">
+              {/* <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-stone-200/60 shadow-sm relative z-0">
                 <RelationshipManager
                   person={person}
                   isAdmin={isAdmin}
                   canEdit={canEdit}
                   onStatsLoaded={handleStatsLoaded}
-                />
-              </div>
+                /> */}
+                <div className="bg-white/80 backdrop-blur-sm p-4 sm:p-6 rounded-2xl border border-stone-200/60 shadow-sm relative z-0 min-h-[120px]">
+                  <Suspense fallback={
+                    <div className="space-y-3 animate-pulse">
+                      <div className="h-4 bg-stone-100 rounded-full w-1/3" />
+                      <div className="h-12 bg-stone-100 rounded-xl w-full" />
+                      <div className="h-12 bg-stone-100 rounded-xl w-full" />
+                      <div className="h-12 bg-stone-100 rounded-xl w-4/5" />
+                    </div>
+                  }>
+                    <RelationshipManager
+                      person={person}
+                      isAdmin={isAdmin}
+                      canEdit={canEdit}
+                      onStatsLoaded={handleStatsLoaded}
+                    />
+                  </Suspense>
+                </div>
+              {/* </div> */}
             </motion.section>
           </div>
 
