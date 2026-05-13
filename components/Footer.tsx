@@ -13,7 +13,7 @@ export default function Footer({
     >
       <div className="max-w-7xl mx-auto px-4">
         {showDisclaimer && (
-          <div className="mb-4 inline-flex items-center gap-1 rounded-full border border-amber-200/50 bg-amber-50 px-3 py-2 text-sm leading-none tracking-wide text-amber-800/80">
+          <div className="mb-4 inline-flex items-center gap-1 rounded-full border border-amber-200/50 bg-amber-50 px-3 py-2 text-xs leading-none tracking-wide text-amber-800/80">
             <span>
               Nội dung có thể thiếu sót, vui lòng liên hệ quản trị viên qua
             </span>

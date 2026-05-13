@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Clock, User, Plus, Pencil, Trash2, Loader2 } from "lucide-react";
 
 interface AuditLog {
-  id: string;
+  log_id: string;  // ← đổi từ id
   action: string;
   table_name: string;
   record_id: string;
@@ -100,7 +100,7 @@ export default function AuditLogList({ recordId }: { recordId?: string }) {
         const personName = (log.new_data?.full_name || log.old_data?.full_name) as string;
 
         return (
-          <div key={log.id} className="bg-white border border-stone-200/80 rounded-xl p-4 shadow-xs">
+          <div key={log.log_id} className="bg-white border border-stone-200/80 rounded-xl p-4 shadow-xs">
             <div className="flex items-start gap-3">
               <div className={`p-2 rounded-lg border ${cfg?.color} shrink-0`}>
                 <Icon className="size-3.5" />
