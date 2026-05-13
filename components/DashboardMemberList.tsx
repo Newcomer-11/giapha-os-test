@@ -430,7 +430,7 @@ export default function DashboardMemberList({
                               if (!label) return null;
 
                               return (
-                                <div className="absolute -top-3 left-8 px-3 py-0.5 bg-stone-100 text-xs font-bold text-stone-600 tracking-widest border border-stone-300 rounded-full shadow-sm z-20">
+                                <div className="absolute -top-4 left-8 px-4 py-1 bg-orange-200 text-sm font-bold text-stone-600 tracking-widest border border-stone-300 rounded-full shadow-sm z-20">
                                   {label}
                                 </div>
                               );

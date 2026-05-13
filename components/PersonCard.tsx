@@ -71,7 +71,7 @@ export default function PersonCard({ person }: PersonCardProps) {
           <h3 className="text-base text-left sm:text-lg font-bold text-stone-900 group-hover:text-amber-700 transition-colors truncate mb-1.5">
             {person.full_name}
           </h3>
-          <p className="text-sm font-medium text-stone-500 truncate flex items-center gap-1.5">
+          <p className="text-sm font-medium text-stone-800 truncate flex items-center gap-1.5">
             <svg
               className="size-4 shrink-0 text-stone-400"
               fill="none"
@@ -126,7 +126,7 @@ export default function PersonCard({ person }: PersonCardProps) {
                 </span>
               )}
               {isDeceased && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold bg-stone-100 text-stone-500 uppercase tracking-widest border border-stone-200/60 shadow-xs">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold bg-stone-100 text-stone-800 uppercase tracking-widest border border-stone-200/60 shadow-xs">
                   Đã mất
                 </span>
               )}

@@ -176,14 +176,14 @@ function EventCard({
           >
             {event.personName}
           </p>
-          {isBirthday &&
+          {/* {isBirthday &&
             event.originDay &&
             event.originMonth &&
             getZodiacSign(event.originDay, event.originMonth) && (
               <span className="shrink-0 text-[10px] font-sans font-bold text-indigo-700 bg-indigo-50 border border-indigo-200/60 rounded-md px-1.5 py-0.5 whitespace-nowrap shadow-xs tracking-wider">
                 {getZodiacSign(event.originDay, event.originMonth)}
               </span>
-            )}
+            )}  */}
           {/* Days badge — inline with name */}
           <span
             className={`shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-bold leading-tight whitespace-nowrap ${
