@@ -13,17 +13,22 @@ export default function Footer({
     >
       <div className="max-w-7xl mx-auto px-4">
         {showDisclaimer && (
-          <p className="mb-4 text-xs tracking-wide bg-amber-50 inline-block px-3 py-1 rounded-full text-amber-800/80 border border-amber-200/50">
-            Nội dung có thể thiếu sót. Vui lòng liên hệ quản trị viên qua <a
-                  href="mailto:giaphahotranphuc@gmail.com"
-                  className="font-semibold text-amber-700 hover:text-amber-600 transition-colors inline-flex items-center gap-1.5 mt-2"
-                >
-                  email
-                </a> để cập nhật thông tin   
-            
-          </p>
+          <div className="mb-4 inline-flex items-center gap-1 rounded-full border border-amber-200/50 bg-amber-50 px-3 py-2 text-sm leading-none tracking-wide text-amber-800/80">
+            <span>
+              Nội dung có thể thiếu sót, vui lòng liên hệ quản trị viên qua
+            </span>
+
+            <a
+              href="mailto:giaphahotranphuc@gmail.com"
+              className="font-semibold text-amber-700 transition-colors hover:text-amber-600"
+            >
+              email
+            </a>
+
+            <span>để cập nhật thông tin</span>
+          </div>
         )}
-        <p className="flex items-center justify-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
+        <p className="flex items-center font-semibold text-black justify-center gap-2 opacity-80 hover:opacity-100 transition-opacity">
           <a
             // href="https://github.com/homielab/giapha-os"
             // target="_blank"
